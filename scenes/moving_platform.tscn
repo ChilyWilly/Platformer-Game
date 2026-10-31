@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cjqq3m2k1agub"]
+
+[ext_resource type="Texture2D" uid="uid://cvwf54jwua2fp" path="res://assets/art/Traps/Falling Platforms/Off.png" id="1_ms375"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_djxyh"]
+size = Vector2(32, 1)
+
+[node name="MovingPlatform" type="AnimatableBody2D" unique_id=770077778]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2008548834]
+texture = ExtResource("1_ms375")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=971153351]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_djxyh")
+one_way_collision = true
