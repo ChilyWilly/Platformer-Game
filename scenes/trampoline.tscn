@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://domgvf1f7fhxl"]
+
+[ext_resource type="Script" uid="uid://b0rej2g403xam" path="res://scripts/trampoline.gd" id="1_nytqh"]
+[ext_resource type="Texture2D" uid="uid://bp0k5depidnys" path="res://assets/art/Traps/Trampoline/Idle.png" id="1_svk5y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhxoo"]
+atlas = ExtResource("1_svk5y")
+region = Rect2(0, 0, 28, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5bra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhxoo")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5bra"]
+size = Vector2(23, 5)
+
+[node name="Trampoline" type="Area2D" unique_id=1583449654]
+collision_mask = 2
+script = ExtResource("1_nytqh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1827941161]
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_w5bra")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=817820261]
+position = Vector2(-0.5, -8.5)
+shape = SubResource("RectangleShape2D_w5bra")
+one_way_collision = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cqq1x37mx2ooc"]
+
+[ext_resource type="Texture2D" uid="uid://lwo1bjoycdk8" path="res://assets/art/Traps/Spikes/Idle.png" id="1_5pg7g"]
+
+[sub_resource type="GDScript" id="GDScript_p57ef"]
+script/source = "extends Area2D
+
+
+func _on_body_entered(body: Node2D) -> void:
+	get_tree().reload_current_scene()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbcdo"]
+atlas = ExtResource("1_5pg7g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5bra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbcdo")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Spikes" type="Area2D" unique_id=31910031]
+collision_mask = 4
+script = SubResource("GDScript_p57ef")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1077607212]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_w5bra")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1656209270]
+polygon = PackedVector2Array(-8, 0, -4, -7, 3, -7, 7, 0)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
