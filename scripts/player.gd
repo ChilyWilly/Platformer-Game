@@ -2,13 +2,28 @@ extends CharacterBody2D
 
 
 const SPEED = 200.0
+
 const JUMP_VELOCITY = -300.0
-const WALL_JUMP = -300
-const Wall_SLIDE = 50
-const WALL_JUMP_PUSH = 800
 var double_jump = false
+var double_unlocked = true
+
+const WALL_JUMP = -300
+const WALL_JUMP_PUSH = 800
+
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+
+func _ready() -> void:
+	if GameManager.last_checkpoint_position != Vector2.ZERO:
+		global_position = GameManager.last_checkpoint_position
+		
+		
+func respawn() -> void:
+	if GameManager.last_checkpoint_position != Vector2.ZERO:
+		global_position = GameManager.last_checkpoint_position
+	else:
+		get_tree().reload_current_scene()
 
 
 func _physics_process(delta: float) -> void:
@@ -21,11 +36,13 @@ func _physics_process(delta: float) -> void:
 	# Handle jumps.
 	if Input.is_action_just_pressed("jump") and is_on_floor(): # Normal jump
 		velocity.y = JUMP_VELOCITY
-		double_jump = true
+		if double_unlocked == true:
+			double_jump = true
 	
 	elif Input.is_action_just_pressed("jump") and is_on_wall() and not is_on_floor(): # Wall jump
 		velocity.y = JUMP_VELOCITY
-		double_jump = true
+		if double_unlocked == true:
+			double_jump = true
 		
 		var wall_normal = get_wall_normal()
 		velocity.x = wall_normal.x * WALL_JUMP_PUSH
