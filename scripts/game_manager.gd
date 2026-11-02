@@ -1,14 +1,22 @@
 extends Node2D
 
-signal score_reached
-
 var score = 0
+var time = 0
 
-@onready var game_score: Label = %GameScore
+@onready var game_score: Label = $HUD/Labels/GameScore
+@onready var door: StaticBody2D = $Door
+
 
 func score_change():
 	score += 1
-	game_score.text = "Score: " + str(score)
+	game_score.text = "SCORE: " + str(score)
+	score_reached()
 	
-	if score == 4:
-		score_reached.emit()
+
+func _process(delta: float) -> void:
+	time += 1
+
+
+func score_reached():
+	if score >=6:
+		door.queue_free()
