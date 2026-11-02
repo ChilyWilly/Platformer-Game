@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cgt3o3hactkmf"]
+
+[ext_resource type="Texture2D" uid="uid://dx5wankkqhhyb" path="res://assets/art/Traps/Spike Head/Idle.png" id="1_eu55l"]
+[ext_resource type="Script" uid="uid://b8dyv8ftc0wg5" path="res://scripts/spiked_crusher.gd" id="1_huy83"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huy83"]
+atlas = ExtResource("1_eu55l")
+region = Rect2(0, 0, 54, 52)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5bra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huy83")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5bra"]
+size = Vector2(41, 41)
+
+[node name="SpikedCrusher" type="Area2D" unique_id=1069073260]
+collision_mask = 4
+script = ExtResource("1_huy83")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1055770259]
+sprite_frames = SubResource("SpriteFrames_w5bra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1774296229]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_w5bra")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

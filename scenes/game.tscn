@@ -1,12 +1,10 @@
 [gd_scene format=3 uid="uid://bdd2opry3dwqb"]
 
-[ext_resource type="Script" uid="uid://cknspjgb4dbe1" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://css3gb8erk46" path="res://scenes/levels/level_1.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://ckcoyl21u4jui" path="res://scripts/game_manager.gd" id="2_yqjtg"]
 [ext_resource type="FontFile" uid="uid://1sx0mug7por7" path="res://assets/art/Menu/Text/at01.ttf" id="3_lnu2h"]
 
 [node name="Game" type="Node2D" unique_id=653878540]
-script = ExtResource("1_lbhrr")
 
 [node name="Level1" parent="." unique_id=1375434064 instance=ExtResource("1_uwrxv")]
 
@@ -15,6 +13,13 @@ script = ExtResource("2_yqjtg")
 
 [node name="HUD" type="CanvasLayer" parent="GameManager" unique_id=129117931]
 
+[node name="ColorRect" type="ColorRect" parent="GameManager/HUD" unique_id=1405202064]
+offset_left = 68.0
+offset_top = 66.0
+offset_right = 207.0
+offset_bottom = 107.0
+color = Color(0, 0, 0, 1)
+
 [node name="Labels" type="Node2D" parent="GameManager/HUD" unique_id=1033095061]
 
 [node name="GameScore" type="Label" parent="GameManager/HUD/Labels" unique_id=232708437]
@@ -22,30 +27,11 @@ unique_name_in_owner = true
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 921.0
-offset_top = 64.0
-offset_right = 1029.0
-offset_bottom = 102.0
+offset_left = 76.0
+offset_top = 65.0
+offset_right = 202.0
+offset_bottom = 103.0
 grow_horizontal = 0
 theme_override_fonts/font = ExtResource("3_lnu2h")
 theme_override_font_sizes/font_size = 48
-text = "Score: 0"
-
-[node name="Time" type="Label" parent="GameManager/HUD/Labels" unique_id=834367492]
-offset_left = 920.0
-offset_top = 112.0
-offset_right = 1028.0
-offset_bottom = 150.0
-theme_override_fonts/font = ExtResource("3_lnu2h")
-theme_override_font_sizes/font_size = 48
-text = "Time: 10"
-
-[node name="Timers" type="Node2D" parent="GameManager" unique_id=801855252]
-
-[node name="DeathTimer" type="Timer" parent="GameManager/Timers" unique_id=853347910]
-wait_time = 10.0
-
-[node name="TimeTracker" type="Timer" parent="GameManager/Timers" unique_id=1775486134]
-
-[connection signal="timeout" from="GameManager/Timers/DeathTimer" to="." method="_on_death_timer_timeout"]
-[connection signal="timeout" from="GameManager/Timers/TimeTracker" to="." method="_on_time_tracker_timeout"]
+text = "SCORE: 0"

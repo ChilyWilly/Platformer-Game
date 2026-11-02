@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dsog4x6kehcol"]
+
+[ext_resource type="Texture2D" uid="uid://dxqt0x3sfa8oi" path="res://assets/art/Items/Boxes/Box1/Idle.png" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://ctnd5sgd6tcm7" path="res://scripts/door.gd" id="1_uvdjg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvdjg"]
+atlas = ExtResource("1_hpvv5")
+region = Rect2(0, 0, 28, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5bra"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvdjg")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5bra"]
+size = Vector2(20, 30)
+
+[node name="Door" type="StaticBody2D" unique_id=63807325]
+script = ExtResource("1_uvdjg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=803294529]
+position = Vector2(0, -15.000001)
+scale = Vector2(1, 1.5312499)
+sprite_frames = SubResource("SpriteFrames_w5bra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=870246676]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_w5bra")

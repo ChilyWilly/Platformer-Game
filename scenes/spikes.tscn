@@ -1,14 +1,7 @@
 [gd_scene format=3 uid="uid://cqq1x37mx2ooc"]
 
 [ext_resource type="Texture2D" uid="uid://lwo1bjoycdk8" path="res://assets/art/Traps/Spikes/Idle.png" id="1_5pg7g"]
-
-[sub_resource type="GDScript" id="GDScript_p57ef"]
-script/source = "extends Area2D
-
-
-func _on_body_entered(body: Node2D) -> void:
-	get_tree().reload_current_scene()
-"
+[ext_resource type="Script" uid="uid://b0mykhngji8jx" path="res://scripts/new_gd_script.gd" id="1_xbcdo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xbcdo"]
 atlas = ExtResource("1_5pg7g")
@@ -27,7 +20,7 @@ animations = [{
 
 [node name="Spikes" type="Area2D" unique_id=31910031]
 collision_mask = 4
-script = SubResource("GDScript_p57ef")
+script = ExtResource("1_xbcdo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1077607212]
 position = Vector2(0, -8)

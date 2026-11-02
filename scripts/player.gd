@@ -1,36 +1,47 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0
+var SPEED = 200.0
 
-const JUMP_VELOCITY = -300.0
+var JUMP_VELOCITY = -300.0
 var double_jump = false
 var double_unlocked = true
+var has_gravity: = true
 
 const WALL_JUMP = -300
 const WALL_JUMP_PUSH = 800
+var debug_on = false
 
-
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 
-func _ready() -> void:
-	if GameManager.last_checkpoint_position != Vector2.ZERO:
-		global_position = GameManager.last_checkpoint_position
-		
-		
-func respawn() -> void:
-	if GameManager.last_checkpoint_position != Vector2.ZERO:
-		global_position = GameManager.last_checkpoint_position
+func debug():
+	if Input.is_action_just_pressed("debug"):
+		debug_on = not debug_on
+	
+	if debug_on:
+		collision_shape.disabled = true
+		has_gravity = false
+		animated_sprite.modulate = Color.BLACK
+		var vertical := Input.get_axis("up", "down")
+		if vertical:
+			velocity.y = vertical * SPEED
+		else:
+			velocity.y = move_toward(velocity.y, 0, SPEED)
 	else:
-		get_tree().reload_current_scene()
-
+		has_gravity = true
+		collision_shape.disabled = false
+		animated_sprite.modulate = Color.WHITE
 
 func _physics_process(delta: float) -> void:
 	animations()
 	
+	if is_on_floor():
+		double_jump = true
+	
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and has_gravity:
 		velocity += get_gravity() * delta
 	
 	# Handle jumps.
@@ -59,7 +70,9 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-			
+
+	debug()
+	
 	move_and_slide()
 
 
